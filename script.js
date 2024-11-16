@@ -67,7 +67,7 @@ roll.addEventListener('click', () => {
 });
 
 const ground = new THREE.Mesh(
-    new THREE.PlaneGeometry(10, 10,),
+    new THREE.PlaneGeometry(10, 10),
     new THREE.MeshStandardMaterial({color: 0x8B4513, side: THREE.DoubleSide})
 );
 ground.rotation.x = -Math.PI / 2;
@@ -79,6 +79,55 @@ const groundBody = new CANNON.Body({
 });
 groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
 world.addBody(groundBody);
+
+
+const leftWall = new THREE.Mesh(
+    new THREE.PlaneGeometry(10, 10),
+    new THREE.MeshStandardMaterial({color: 0x8B4513, side: THREE.DoubleSide})
+);
+leftWall.position.x = -5;
+leftWall.rotation.y = Math.PI / 2;
+scene.add(leftWall);
+
+const leftWallBody = new CANNON.Body({
+    mass: 0,
+    shape: new CANNON.Plane()
+});
+leftWallBody.position.set(-5, 0, 0);
+leftWallBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
+world.addBody(leftWallBody);
+
+
+const rightWall = new THREE.Mesh(
+    new THREE.PlaneGeometry(10, 10),
+    new THREE.MeshStandardMaterial({color: 0x8B4513, side: THREE.DoubleSide})
+);
+rightWall.position.x = 5;
+rightWall.rotation.y = -Math.PI / 2;
+scene.add(rightWall);
+
+const rightWallBody = new CANNON.Body({
+    mass: 0,
+    shape: new CANNON.Plane()
+});
+rightWallBody.position.set(5, 0, 0);
+rightWallBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), -Math.PI / 2);
+world.addBody(rightWallBody);
+
+
+const backWall = new THREE.Mesh(
+    new THREE.PlaneGeometry(10, 10),
+    new THREE.MeshStandardMaterial({color: 0x8B4513, side: THREE.DoubleSide})
+);
+backWall.position.z = -5;
+scene.add(backWall);
+
+const backWallBody = new CANNON.Body({
+    mass: 0,
+    shape: new CANNON.Plane()
+});
+backWallBody.position.set(0, 0, -5);
+world.addBody(backWallBody);
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 2);
 scene.add(ambientLight);
