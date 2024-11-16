@@ -25,7 +25,7 @@ window.addEventListener('resize', () => {
 const controls = new OrbitControls(camera, renderer.domElement);
 
 camera.position.z = 5;
-camera.position.y = 1.5;
+camera.position.y = 4;
 
 const textureLoader = new THREE.TextureLoader();
 
